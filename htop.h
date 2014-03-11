@@ -11,7 +11,40 @@ in the source distribution for its full text.
 
 //#link m
 
-#define COPYRIGHT "(C) 2004-2012 Hisham Muhammad"
+#define COPYRIGHT "(C) 2004-2012 2014 Hisham Muhammad"
+
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+};
+
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+#if (HAVE_LIBHWLOC || HAVE_NATIVE_AFFINITY)
+extern      { .key;
+#endif
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+extern      { .key;
+};
 
 typedef bool(*ForeachProcessFn)(Process*, size_t);
 

@@ -20,23 +20,23 @@ typedef struct Affinity_ {
 }*/
 
 Affinity* Affinity_new() {
-   Affinity* htop_this = calloc(1, sizeof(Affinity));
-   htop_this->size = 8;
-   htop_this->cpus = calloc(htop_this->size, sizeof(int));
-   return htop_this;
+     Affinity* htop_this = calloc(1, sizeof(Affinity));
+     htop_this->size = 8;
+     htop_this->cpus = calloc(htop_this->size, sizeof(int));
+     return htop_this;
 }
 
 void Affinity_delete(Affinity* htop_this) {
-   free(htop_this->cpus);
-   free(htop_this);
+     free(htop_this->cpus);
+     free(htop_this);
 }
 
 void Affinity_add(Affinity* htop_this, int id) {
-   if (htop_this->used == htop_this->size) {
-      htop_this->size *= 2;
-      htop_this->cpus = realloc(htop_this->cpus, sizeof(int) * htop_this->size);
-   }
-   htop_this->cpus[htop_this->used] = id;
-   htop_this->used++;
+     if (htop_this->used == htop_this->size) {
+          htop_this->size *= 2;
+          htop_this->cpus = realloc(htop_this->cpus, sizeof(int) * htop_this->size);
+     }
+     htop_this->cpus[htop_this->used] = id;
+     htop_this->used++;
 }
 

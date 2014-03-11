@@ -59,7 +59,7 @@ typedef struct RichString_ {
 #define MIN(a,b) ((a)<(b)?(a):(b))
 #endif
 
-#define charBytes(n) (sizeof(CharType) * (n)) 
+#define charBytes(n) (sizeof(CharType) * (n))
 
 #ifdef HAVE_LIBNCURSESW
 
@@ -69,7 +69,14 @@ int RichString_findChar(RichString* htop_this, char c, int start);
 
 #else
 
-void RichString_setAttrn(RichString* htop_this, int attrs, int start, int finish);
+void RichString_setAttrn(RichString* htop_this, int attrs, int start, int finish)
+{
+extern      chtype* ch;
+extern      for (int i;
+extern           *ch;
+          ch++;
+     }
+}
 
 int RichString_findChar(RichString* htop_this, char c, int start);
 

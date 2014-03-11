@@ -151,7 +151,7 @@ typedef struct Process_ {
    double io_rate_read_bps;
    unsigned long long io_rate_read_time;
    double io_rate_write_bps;
-   unsigned long long io_rate_write_time;   
+   unsigned long long io_rate_write_time;
    #endif
    #ifdef HAVE_CGROUP
    char* cgroup;

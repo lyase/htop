@@ -30,61 +30,59 @@ typedef struct AvailableColumnsPanel_ {
 }*/
 
 static void AvailableColumnsPanel_delete(Object* object) {
-   Panel* super = (Panel*) object;
-   AvailableColumnsPanel* htop_this = (AvailableColumnsPanel*) object;
-   Panel_done(super);
-   free(htop_this);
+     Panel* super = (Panel*) object;
+     AvailableColumnsPanel* htop_this = (AvailableColumnsPanel*) object;
+     Panel_done(super);
+     free(htop_this);
 }
 
 static HandlerResult AvailableColumnsPanel_eventHandler(Panel* super, int ch) {
-   AvailableColumnsPanel* htop_this = (AvailableColumnsPanel*) super;
-   char* text = ((ListItem*) Panel_getSelected(super))->value;
-   HandlerResult result = IGNORED;
+     AvailableColumnsPanel* htop_this = (AvailableColumnsPanel*) super;
+     char* text = ((ListItem*) Panel_getSelected(super))->value;
+     HandlerResult result = IGNORED;
 
-   switch(ch) {
-      case 13:
-      case KEY_ENTER:
-      case KEY_F(5):
-      {
-         int at = Panel_getSelectedIndex(htop_this->columns);
-         Panel_insert(htop_this->columns, at, (Object*) ListItem_new(text, 0));
-         Panel_setSelected(htop_this->columns, at+1);
-         ColumnsPanel_update(htop_this->columns);
-         result = HANDLED;
-         break;
-      }
-      default:
-      {
-         if (isalpha(ch))
-            result = Panel_selectByTyping(super, ch);
-         break;
-      }
-   }
-   return result;
+     switch(ch) {
+     case 13:
+     case KEY_ENTER:
+     case KEY_F(5): {
+          int at = Panel_getSelectedIndex(htop_this->columns);
+          Panel_insert(htop_this->columns, at, (Object*) ListItem_new(text, 0));
+          Panel_setSelected(htop_this->columns, at+1);
+          ColumnsPanel_update(htop_this->columns);
+          result = HANDLED;
+          break;
+     }
+     default: {
+          if (isalpha(ch))
+               result = Panel_selectByTyping(super, ch);
+          break;
+     }
+     }
+     return result;
 }
 
 PanelClass AvailableColumnsPanel_class = {
-   .super = {
-      .extends = Class(Panel),
-      .htop_delete = AvailableColumnsPanel_delete
-   },
-   .eventHandler = AvailableColumnsPanel_eventHandler
+     .super = {
+          .extends = Class(Panel),
+          .htop_delete = AvailableColumnsPanel_delete
+     },
+     .eventHandler = AvailableColumnsPanel_eventHandler
 };
 
 AvailableColumnsPanel* AvailableColumnsPanel_new(Settings* settings, Panel* columns, ScreenManager* scr) {
-   AvailableColumnsPanel* htop_this = AllocThis(htop_this,AvailableColumnsPanel);
-   Panel* super = (Panel*) htop_this;
-   Panel_init(super, 1, 1, 1, 1, Class(ListItem), true);
-   
-   htop_this->settings = settings;
-   htop_this->scr = scr;
+     AvailableColumnsPanel* htop_this = AllocThis(htop_this,AvailableColumnsPanel);
+     Panel* super = (Panel*) htop_this;
+     Panel_init(super, 1, 1, 1, 1, Class(ListItem), true);
 
-   Panel_setHeader(super, "Available Columns");
+     htop_this->settings = settings;
+     htop_this->scr = scr;
 
-   for (int i = 1; i < LAST_PROCESSFIELD; i++) {
-      if (i != COMM)
-         Panel_add(super, (Object*) ListItem_new(Process_fieldNames[i], 0));
-   }
-   htop_this->columns = columns;
-   return htop_this;
+     Panel_setHeader(super, "Available Columns");
+
+     for (int i = 1; i < LAST_PROCESSFIELD; i++) {
+          if (i != COMM)
+               Panel_add(super, (Object*) ListItem_new(Process_fieldNames[i], 0));
+     }
+     htop_this->columns = columns;
+     return htop_this;
 }
