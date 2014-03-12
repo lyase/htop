@@ -15,7 +15,7 @@ in the source distribution for its full text.
 /*{
 #include "Object.h"
 
-#define swap(a_,x_,y_) do{ void* tmp_ = a_[x_]; a_[x_] = a_[y_]; a_[y_] = tmp_; }while(0)
+#define htop_swap(a_,x_,y_) do{ void* tmp_ = a_[x_]; a_[x_] = a_[y_]; a_[y_] = tmp_; }while(0)
 
 #ifndef DEFAULT_SIZE
 #define DEFAULT_SIZE -1
@@ -101,16 +101,16 @@ static int comparisons = 0;
 
 static int partition(Object** array, int left, int right, int pivotIndex, Object_Compare compare) {
      void* pivotValue = array[pivotIndex];
-     swap(array, pivotIndex, right);
+     htop_swap(array, pivotIndex, right);
      int storeIndex = left;
      for (int i = left; i < right; i++) {
           comparisons++;
           if (compare(array[i], pivotValue) <= 0) {
-               swap(array, i, storeIndex);
+               htop_swap(array, i, storeIndex);
                storeIndex++;
           }
      }
-     swap(array, storeIndex, right);
+     htop_swap(array, storeIndex, right);
      return storeIndex;
 }
 
@@ -137,7 +137,7 @@ static void combSort(Object** array, int left, int right, Object_Compare compare
       for (int i = left; gap + i <= right; i++) {
          comparisons++;
          if (compare(array[i], array[i+gap]) > 0) {
-            swap(array, i, i+gap);
+            htop_swap(array, i, i+gap);
             swapped = true;
          }
       }

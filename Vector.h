@@ -11,7 +11,7 @@ in the source distribution for its full text.
 
 #include "Object.h"
 
-#define swap(a_,x_,y_) do{ void* tmp_ = a_[x_]; a_[x_] = a_[y_]; a_[y_] = tmp_; }while(0)
+#define htop_swap(a_,x_,y_) do{ void* tmp_ = a_[x_]; a_[x_] = a_[y_]; a_[y_] = tmp_; }while(0)
 
 #ifndef DEFAULT_SIZE
 #define DEFAULT_SIZE -1
